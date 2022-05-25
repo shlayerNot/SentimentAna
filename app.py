@@ -83,15 +83,15 @@ def dashboard():
         preprocess_lms = vectorizer_lms.transform([clean])
         preprocess_course = vectorizer_course.transform([clean])
 
-        #load the model
-        lg_lms = pickle.load(open('lg_lms_model.pkl', 'rb')) #Model for LMS
-        lg_course = pickle.load(open('lg_course_model.pkl', 'rb'))  # Model for Course
-
-        prediction_lms = lg_lms.predict(preprocess_lms)
-        prediction_course = lg_course.predict(preprocess_course)
-
-
-        return render_template('Dashboard.html',feedback= feedback, p1=prediction_lms[0], data=data)
+        if (request.form.get("lms") == "lms"):
+            # load the model
+            lg_lms = pickle.load(open('lg_lms_model.pkl', 'rb'))  # Model for LMS
+            prediction_lms = lg_lms.predict(preprocess_lms)
+            return render_template('Dashboard.html', feedback=feedback, p1=prediction_lms[0], data=data)
+        elif (request.form.get("course") == "course"):
+            lg_course = pickle.load(open('lg_course_model.pkl', 'rb'))  # Model for Course
+            prediction_course = lg_course.predict(preprocess_course)
+            return render_template('Dashboard.html', feedback=feedback, p1=prediction_course[0], data=data)
 
     return render_template('Dashboard.html', data=data)
 
