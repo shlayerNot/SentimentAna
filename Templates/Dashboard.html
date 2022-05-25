@@ -16,6 +16,7 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fontawesome-free-5.15.4-web/css/all.css')}}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css')}}">
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
@@ -50,6 +51,7 @@
         chart.draw(data, options);
       }
     </script>
+
   <style>
     .negative{
       background-color: #ff9900;
@@ -87,28 +89,31 @@
 
       <div class="row">
 
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mt-3">
           <div class="card shadow-lg  animate__animated  animate__zoomIn">
             <div class="card-header">
-              <i class="fab fa-twitter" style="color: #74c0fc;"></i>   Tweets Here
+              <i class="fab fa-twitter" style="color: #74c0fc;"></i>   Feedback Here
             </div>
+
+            <!-- Form for entering the feedback to be analyze-->
             <div class="card-body">
               <form method="POST" class="form" id="analyzeForm">
                 <div class="form-group">
                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="feedback"></textarea>
                  </div>
                 <div class=dropdown">
-                  <button class="btn btn-primary btn-block btn-lg btnAnalyze" type="submit" name="Analyze" id="btn" data-toggle="dropdown"><i class="fab fa-searchengin" ></i> Analyze <span class="caret"></span></button>
+                  <button class="btn btn-primary btn-block btn-lg btnAnalyze" name="Analyze" id="btn" data-toggle="dropdown"> <i class="fab fa-searchengin" ></i>Analyze <span class="caret"></span></button>
                   <ul class="dropdown-menu">
-                    <li>LMS</li>
-                    <li>COURSE</li>
+                    <button class="btn btn-primary btn-block btn-lg btnAnalyze" type="submit" name="lms" value="lms"><li>LMS</li></button>
+                    <button class="btn btn-primary btn-block btn-lg btnAnalyze" type="submit" name="lms" value="course"><li>COURSE</li></button>
                   </ul>
                 </div>
               </form>
             </div>
-          </div>
-          
-          <div style=" margin-top: 100px" class="card shadow-lg mt-1">
+          </div> <!--end of Form for entering the feedback to be analyze-->
+
+          <!-- Result of the Feedback Analysis-->
+          <div class="card shadow-lg mt-5">
             <div class="card-body">
               <div class="form-group" >
                 <ul class="list-group">
@@ -117,7 +122,7 @@
                   </div>
                   {% endif %}
                   {% if p1%}
-                  <li class="list-group-item" style = "font-size: 25px">The tweet is
+                  <li class="list-group-item" style = "font-size: 25px">The feedback is
                     <span class="badge
                     {% if p1=='Negative' %}
                       negative
@@ -129,41 +134,56 @@
                     ">{{p1}}</span>
                     {% endif %}
                   </li>
-                 
                 </ul>
               </div>
             </div>
-          </div>
+          </div> <!--end of Result of the Feedback Analysis-->
         
       </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mt-3">
+        <div class="card shadow-sm animate__animated  animate__zoomIn">
+
+          <div class="card-header">
+            <i class="fas fa-chart-pie"></i>
+            Analyze Tweet Classification LMS
+          </div>
+
+          <div class="card-body">
+            <div id="piechart_3d" style="width: 500px; height: 300px;"></div>
+          </div>
+
+          <div class="card-footer">
+            The total number of Analyzed data is <span class="badge badge-success" ></span>
+          </div>
+
+        </div>
+      </div>
+
+
+
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-      <div class="card shadow-sm animate__animated  animate__zoomIn">
-        <div class="card-header">
-          <i class="fas fa-chart-pie"></i>
-         Analyze Twecd et Classification
-        </div>
-        <div class="card-body">
-          <div id="piechart_3d" style="width: 500px; height: 300px;"></div>
-          <footer class="text-center" style = "font-size: 25px">The total number of data is <span class="badge badge-success" ></span></footer>
+        <div class="card shadow-sm animate__animated  animate__zoomIn">
+          <div class="card-header">
+            <i class="fas fa-chart-pie"></i>
+            Analyze Tweet Classification Course
+          </div>
+
+          <div class="card-body">
+            <div id="piechart_3d" style="width: 500px; height: 300px;"></div>
+          </div>
+
+          <div class="card-footer">
+            The total number of Analyzed data is <span class="badge badge-success" ></span>
+          </div>
+
         </div>
       </div>
-      </div>
-    </div><!--row-->
 
-    </div><!-- container -->
+    </div><!--end of row-->
 
+    </div><!-- end of container -->
 
-
-
-  <footer class="footer">
-    <div class="container">
-      <span class="text-muted" data-html="true" data-toggle="tooltip" data-placement="top"
-            data-original-title="Members <br> Basilan, Renz Marrion
-                                <br> Belmonte, Norman Bryan
-                                <br> Credo, Nelson
-                                <br> Fermiza, Rodny">Team Shlayer</span>
-    </div>
-  </footer>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
